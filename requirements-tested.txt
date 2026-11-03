@@ -1,5 +1,5 @@
 # Exact versions the notebook and test suite were run with (Python 3.13.18)
-pandas==3.0.5
+pandas==3.1.0
 numpy==2.5.3
 matplotlib==3.11.2
 seaborn==0.13.2
