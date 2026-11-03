@@ -1,0 +1,16 @@
+# Exact versions the notebook and test suite were run with (Python 3.13.18)
+pandas==3.0.5
+numpy==2.5.3
+matplotlib==3.11.2
+seaborn==0.13.2
+scipy==1.18.1
+statsmodels==0.15.0
+scikit-learn==1.9.1
+ipykernel==7.4.0
+nbconvert==7.17.2
+fastapi==0.162.0
+uvicorn==0.54.0
+pydantic==2.13.5
+sqlalchemy==2.1.6
+pytest==9.1.1
+httpx==0.28.1
