@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "Price Forecast & Uncertainty",
+    "slug": "price-forecast-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.way2agribusiness.forecast"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "local-preview-project"
+      },
+      "apiUrl": "http://10.0.2.2:8080/api/forecast/latest/"
+    }
+  }
+}
