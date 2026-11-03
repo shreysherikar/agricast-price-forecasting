@@ -1,0 +1,30 @@
+# Multi-stage Dockerfile for Django Gateway Service
+FROM python:3.12-slim AS base
+
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    build-essential \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY django_gateway/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt \
+    && pip install --no-cache-dir "psycopg[binary]" psycopg2-binary gunicorn
+
+COPY django_gateway/ ./django_gateway/
+COPY outputs/ ./outputs/
+
+WORKDIR /app/django_gateway
+
+ENV PYTHONUNBUFFERED=1 \
+    DJANGO_DEBUG=False \
+    FASTAPI_BASE_URL=http://api:8000
+
+EXPOSE 8080
+
+HEALTHCHECK --interval=15s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost:${PORT:-8080}/api/health/ || exit 1
+
+CMD ["sh", "-c", "python manage.py migrate && python manage.py load_forecast --file ../outputs/final_forecast.csv --force && gunicorn gateway.wsgi:application --bind 0.0.0.0:${PORT:-8080} --workers 2 --timeout 30"]

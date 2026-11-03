@@ -1,0 +1,34 @@
+# Multi-stage Dockerfile for FastAPI Forecasting Service
+FROM python:3.12-slim AS base
+
+WORKDIR /app
+
+# Install system dependencies for scientific libraries
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install python dependencies
+COPY requirements-api.txt .
+RUN pip install --no-cache-dir -r requirements-api.txt
+
+# Copy application code and approved artifacts
+COPY src/ ./src/
+COPY data/ ./data/
+COPY outputs/ ./outputs/
+COPY main.py .
+
+# Environment configuration
+ENV PYTHONUNBUFFERED=1 \
+    MPLCONFIGDIR=/app/.mplconfig \
+    ARTIFACTS_DIR=/app/outputs \
+    DATA_PATH=/app/data/prices.csv
+
+EXPOSE 8000
+
+# Health check endpoint
+HEALTHCHECK --interval=15s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost:${PORT:-8000}/health || exit 1
+
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
