@@ -1,0 +1,4 @@
+Evaluation Set,Model,MAE,RMSE,sMAPE (%),MASE
+Final Holdout (Oct 2024 – Sep 2025),"SARIMA(1,1,1)(1,0,0)[12] (Selected Primary)",1139.48,1533.89,8.38,0.7334
+Final Holdout (Oct 2024 – Sep 2025),Naive Benchmark (Selected Benchmark),1160.33,1565.74,8.53,0.7469
+Final Holdout (Oct 2024 – Sep 2025),"ARIMA(1,1,1) Non-Seasonal",1162.05,1556.28,8.54,0.748

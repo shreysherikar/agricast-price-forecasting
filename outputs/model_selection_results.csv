@@ -1,0 +1,7 @@
+Model,Training Window,Transform,Validation MAE,Validation RMSE,sMAPE (%),MASE,Worst-Fold MAE,Fit Failures,Role / Status,Selection Rationale
+"SARIMA(1,1,1)(1,0,0)[12]",Rolling 120,Log,952.5,1108.4,11.33,0.613,1985.6,0,SELECTED PRIMARY MODEL,"Lowest mean MAE (952.5), RMSE (1,108.4), sMAPE (11.33%), and MASE (0.613). Best overall balance across validation folds."
+"SARIMA(1,1,1)(1,0,0)[12]",Rolling 120,Raw,958.5,1117.2,11.4,0.617,1987.5,0,Candidate (Alternative),Strong performance; slightly higher RMSE and sMAPE than log transform.
+Naive (Last Value),Rolling 120 / Expanding,Raw / Log,970.2,1120.1,11.6,0.624,1871.7,0,SELECTED PRIMARY BENCHMARK,"Strongest baseline. Lowest worst-fold error on Fold 3 (1,871.7 vs 1,985.6 for SARIMA). Zero parameter risk."
+"ARIMA(1,1,1) [Non-Seasonal]",Rolling 120,Log,1004.1,1149.6,11.83,0.646,1868.2,0,Candidate Benchmark,"Outperformed by Naive (970.2). Good worst-fold robustness, but higher overall error than SARIMA."
+ETS (Additive Trend),Expanding,Raw,997.2,1132.6,11.81,0.642,1799.1,0,Candidate Benchmark,"All 4 validation folds converged successfully (0 failures, MAE 997.2). However, statsmodels ETS requires contiguous observations and cannot process the 30-month unobserved gap in Variant B via state-space Kalman filtering without artificial imputation or truncating history."
+Seasonal Naive (Lag 12),All Windows,Raw / Log,1306.5,1513.3,15.9,0.841,2256.5,0,Rejected,Severe error across all folds. Confirms rigid seasonality assumption degrades accuracy.

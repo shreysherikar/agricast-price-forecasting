@@ -1,0 +1,82 @@
+{
+  "stage": 3,
+  "status": "COMPLETED",
+  "selected_primary_model": "SARIMA(1,1,1)(1,0,0)[12]",
+  "primary_model_config": {
+    "training_window": "Rolling 120 months",
+    "transform": "Log",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      1,
+      0,
+      0,
+      12
+    ]
+  },
+  "selected_benchmark": "Naive (Last Value)",
+  "validation_metrics": {
+    "primary_model": {
+      "MAE": 952.5,
+      "RMSE": 1108.4,
+      "sMAPE": 11.33,
+      "MASE": 0.613
+    },
+    "benchmark": {
+      "MAE": 970.2,
+      "RMSE": 1120.1,
+      "sMAPE": 11.6,
+      "MASE": 0.624
+    }
+  },
+  "holdout_metrics": {
+    "holdout_period": "2024-10-01 to 2025-09-01",
+    "primary_model": {
+      "MAE": 1139.5,
+      "RMSE": 1533.88,
+      "sMAPE": 8.38,
+      "MASE": 0.7334
+    },
+    "benchmark": {
+      "MAE": 1160.33,
+      "RMSE": 1565.74,
+      "sMAPE": 8.53,
+      "MASE": 0.7469
+    },
+    "non_seasonal_arima": {
+      "MAE": 1162.05,
+      "RMSE": 1556.29,
+      "sMAPE": 8.54,
+      "MASE": 0.748
+    }
+  },
+  "forecast_summary": {
+    "forecast_origin": "2025-09-01",
+    "origin_price": 15750.0,
+    "forecast_horizon": "2025-10-01 to 2026-09-01",
+    "point_forecasts": [
+      15531.7,
+      15411.2,
+      15043.4,
+      14737.0,
+      14721.0,
+      15532.7,
+      15542.7,
+      15535.3,
+      15529.6,
+      15960.7,
+      15717.7,
+      15894.5
+    ],
+    "mean_point_forecast": 15429.8,
+    "min_point_forecast": 14721.0,
+    "max_point_forecast": 15960.7,
+    "lower_80_final_month": 12561.7,
+    "upper_80_final_month": 20111.6,
+    "lower_95_final_month": 11090.4,
+    "upper_95_final_month": 22779.6
+  }
+}
